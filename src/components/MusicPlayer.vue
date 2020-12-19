@@ -3,18 +3,12 @@
     <available-songs
       id="available-songs"
       class="song-list"
-      :songs="songsAvailable"
+      :songs="availableSongs"
       v-on:add-to-playlist="addToPlaylist($event)"
-      v-on:add-new-song="addNewSong($event)"
     >
     </available-songs>
 
-    <play-list
-      id="play-list"
-      class="song-list"
-      :songs="playList"
-      v-on:remove-from-playlist="removeFromPlaylist($event)"
-    >
+    <play-list id="play-list" class="song-list" :songs="playlistSongs">
     </play-list>
   </div>
 </template>
@@ -31,41 +25,14 @@ export default {
     AvailableSongs,
   },
 
-  methods: {
-    addToPlaylist(aId) {
-      this.playList.push(this.songsAvailable[aId]);
-      this.songsAvailable.splice(aId, 1);
+  computed: {
+    availableSongs() {
+      return this.$store.getters.getSongs;
     },
 
-    removeFromPlaylist(aId) {
-      this.songsAvailable.push(this.playList[aId]);
-      this.playList.splice(aId, 1);
+    playlistSongs() {
+      return this.$store.getters.getPlaylist;
     },
-
-    addNewSong(aSong) {
-      console.log(aSong);
-      this.songsAvailable.push(aSong);
-    },
-  },
-
-  data: function() {
-    return {
-      songsAvailable: [
-        { title: "Rock Me Amadeus", artist: "Falco" },
-        {
-          title: "Ashes of Love (feat. Caroline Polachek)",
-          artist: "Danny L Harle",
-        },
-        { title: "Mirrors", artist: "Justin Timberlake" },
-        { title: "Tell It to My Heart", artist: "Taylor Dayne" },
-        { title: "Radioactive", artist: "MARINA" },
-        { title: "There's a Thug In My Life", artist: "Rihanna" },
-        { title: "Be With You", artist: "Enrique Iglesias" },
-        { title: "You Spin Me Round (Like a Record)", artist: "Dead or Alive" },
-      ],
-
-      playList: [],
-    };
   },
 };
 </script>
