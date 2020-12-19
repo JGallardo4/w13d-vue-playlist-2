@@ -51,19 +51,19 @@ const store = new Vuex.Store({
   },
 
   getters: {
-    getSongs() {
+    getSongs(state) {
       return state.songList.filter((song) => song.isInPlayList == false);
     },
 
-    getPlaylist() {
+    getPlaylist(state) {
       return state.songList.filter((song) => song.isInPlayList == true);
     },
   },
 
   mutations: {
-    ADD_SONG(state, aNewSong) {
+    ADD_SONG(state, payload) {
       var newSong = {
-        id: payload.id,
+        id: state.songList.length,
         title: payload.title,
         artist: payload.artist,
         isInPlayList: false,

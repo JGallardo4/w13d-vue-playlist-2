@@ -2,7 +2,7 @@
   <li class="song">
     <h1 class="song__title">{{ songInfo.title }}</h1>
     <h1 class="song__artist">{{ songInfo.artist }}</h1>
-    <button class="song__button" v-on:click="buttonAction">
+    <button class="song__button" v-on:click="togglePlaylist(songInfo.id)">
       <slot></slot>
     </button>
   </li>
@@ -16,9 +16,11 @@ export default {
     songInfo: {
       type: Object,
     },
+  },
 
-    buttonAction: {
-      type: Function,
+  methods: {
+    togglePlaylist(aSong) {
+      this.$store.dispatch("togglePlaylist", aSong);
     },
   },
 };

@@ -5,7 +5,7 @@
     <button
       class="add-song__button"
       v-on:click.prevent="
-        $emit('add-new-song', { title: newTitle, artist: newArtist })
+        addSong({ id: -1, title: newTitle, artist: newArtist })
       "
     >
       Add New Song
@@ -22,6 +22,11 @@ export default {
 
       newArtist: "",
     };
+  },
+  methods: {
+    addSong(aSong) {
+      this.$store.dispatch("addSong", aSong);
+    },
   },
 };
 </script>

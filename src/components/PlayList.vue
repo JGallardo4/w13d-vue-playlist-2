@@ -8,7 +8,6 @@
         v-for="(song, index) in songs"
         :key="index"
         :songInfo="song"
-        :buttonAction="() => $emit('remove-from-playlist', index)"
         class="song"
       >
         <i class="fa fa-minus" aria-hidden="true"></i>

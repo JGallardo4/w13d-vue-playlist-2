@@ -3,13 +3,12 @@
     <header id="song-list__header">
       <h1>Available Songs</h1>
     </header>
-    <add-song v-on:add-new-song="addNewSong($event)"></add-song>
+    <add-song></add-song>
     <ol id="song-list__container">
       <song-component
         v-for="(song, index) in songs"
         :key="index"
         :songInfo="song"
-        :buttonAction="() => $emit('add-to-playlist', index)"
         class="song"
       >
         <i class="fa fa-plus" aria-hidden="true"></i>
@@ -36,8 +35,8 @@ export default {
     AddSong,
   },
   methods: {
-    addNewSong(aEvent) {
-      this.$emit(aEvent);
+    addNewSong(aSong) {
+      this.$store.dispatch("addSong", aSong);
     },
   },
 };
