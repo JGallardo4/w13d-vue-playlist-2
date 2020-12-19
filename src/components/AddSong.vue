@@ -26,6 +26,8 @@ export default {
   methods: {
     addSong(aSong) {
       this.$store.dispatch("addSong", aSong);
+      this.newTitle = "";
+      this.newArtist = "";
     },
   },
 };
